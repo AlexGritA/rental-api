@@ -38,4 +38,9 @@ public class PersonService {
 
         return personRepository.save(existingPerson);
     }
+
+    public void deletePerson(Long id) {
+        Person existingPerson = getPersonById(id);
+        personRepository.delete(existingPerson);
+    }
 }

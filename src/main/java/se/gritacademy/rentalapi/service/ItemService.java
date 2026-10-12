@@ -40,4 +40,9 @@ public class ItemService {
 
         return itemRepository.save(existingItem);
     }
+
+    public void deleteItemById(Long id) {
+        Item existingItem = getItemById(id);
+        itemRepository.delete(existingItem);
+    }
 }
