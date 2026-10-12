@@ -33,9 +33,6 @@ public class Item {
     public Long getId() {
         return id;
     }
-    public void setId(Long newId) {
-        this.id = newId;
-    }
 
     public String getName() {
         return name;
