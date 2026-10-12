@@ -29,4 +29,13 @@ public class PersonService {
         return personRepository.save(person);
     }
 
+    public Person updatePerson(Long id, Person updatedPerson) {
+        Person existingPerson = getPersonById(id);
+
+        existingPerson.setName(updatedPerson.getName());
+        existingPerson.setEmail(updatedPerson.getEmail());
+        existingPerson.setPhoneNumber(updatedPerson.getPhoneNumber());
+
+        return personRepository.save(existingPerson);
+    }
 }

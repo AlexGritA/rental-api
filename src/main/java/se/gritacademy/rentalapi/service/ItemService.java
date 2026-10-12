@@ -30,4 +30,14 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
+    public Item updateItem(Long id, Item updatedItem) {
+        Item existingItem = getItemById(id);
+
+        existingItem.setName(updatedItem.getName());
+        existingItem.setDescription(updatedItem.getDescription());
+        existingItem.setCategory(updatedItem.getCategory());
+        existingItem.setPricePerDay(updatedItem.getPricePerDay());
+
+        return itemRepository.save(existingItem);
+    }
 }
