@@ -1,4 +1,7 @@
 package se.gritacademy.rentalapi.repository;
 
-public interface ItemRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import se.gritacademy.rentalapi.model.Item;
+
+public interface ItemRepository extends JpaRepository <Item, Long> {
 }
