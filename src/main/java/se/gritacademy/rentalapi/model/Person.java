@@ -16,6 +16,7 @@ public class Person {
     private Long id;
     @NotBlank
     private String name;
+    @NotBlank
     @Email
     private String email;
     @NotBlank
