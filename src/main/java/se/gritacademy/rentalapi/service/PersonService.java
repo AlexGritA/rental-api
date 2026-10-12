@@ -22,7 +22,11 @@ public class PersonService {
 
     public Person getPersonById(Long id) {
         return personRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Person med id " + id + " hittades inte"));
+                .orElseThrow(() -> new ResourceNotFoundException("Person with id " + id + " not found"));
+    }
+
+    public Person createPerson(Person person) {
+        return personRepository.save(person);
     }
 
 }

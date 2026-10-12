@@ -23,7 +23,11 @@ public class ItemService {
 
     public Item getItemById(Long id) {
         return itemRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Item med id " + id + " hittades inte"));
+                .orElseThrow(() -> new ResourceNotFoundException("Item with id " + id + " not found"));
+    }
+
+    public Item createItem(Item item) {
+        return itemRepository.save(item);
     }
 
 }
