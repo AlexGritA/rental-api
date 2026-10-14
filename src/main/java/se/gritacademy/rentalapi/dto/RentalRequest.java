@@ -1,5 +1,6 @@
 package se.gritacademy.rentalapi.dto;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 
@@ -49,5 +50,13 @@ public class RentalRequest {
     }
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    @AssertTrue(message = "endDate must be after startDate")
+    public boolean isEndDateAfterStartDate() {
+        if (startDate == null || endDate == null) {
+            return true;
+        }
+        return endDate.isAfter(startDate);
     }
 }

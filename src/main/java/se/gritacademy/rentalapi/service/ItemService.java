@@ -2,6 +2,7 @@ package se.gritacademy.rentalapi.service;
 
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
+import se.gritacademy.rentalapi.exception.ConflictException;
 import se.gritacademy.rentalapi.exception.ResourceNotFoundException;
 import se.gritacademy.rentalapi.model.Item;
 import se.gritacademy.rentalapi.repository.ItemRepository;
@@ -46,6 +47,10 @@ public class ItemService {
 
     public void deleteItemById(Long id) {
         Item existingItem = getItemById(id);
+
+        if (rentalRepository.existsByItemId(id)) {
+            throw new ConflictException("Item with id " + id + " has rental history and cannot be deleted");
+        }
         itemRepository.delete(existingItem);
     }
 }

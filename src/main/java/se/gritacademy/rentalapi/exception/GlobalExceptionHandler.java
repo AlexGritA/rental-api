@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
 
     // 409
     @ExceptionHandler(ConflictException.class)
-    public ResponseEntity<Map<String, String>> handleConflict(ResourceNotFoundException ex) {
+    public ResponseEntity<Map<String, String>> handleConflict(ConflictException ex) {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
