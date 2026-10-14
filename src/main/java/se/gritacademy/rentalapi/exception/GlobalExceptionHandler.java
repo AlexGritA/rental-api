@@ -12,15 +12,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // 404, resursen finns inte
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleNotFound(ResourceNotFoundException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-    }
-
-    // 400, valideringsfel (@Valid)
+    // 400 (@Valid)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidation(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
@@ -28,5 +20,21 @@ public class GlobalExceptionHandler {
                 errors.put(fieldError.getField(), fieldError.getDefaultMessage())
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
+
+    // 404 resurs finns ej
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleNotFound(ResourceNotFoundException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    // 409
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<Map<String, String>> handleConflict(ResourceNotFoundException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 }
