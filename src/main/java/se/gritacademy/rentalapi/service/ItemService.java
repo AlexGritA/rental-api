@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import se.gritacademy.rentalapi.exception.ResourceNotFoundException;
 import se.gritacademy.rentalapi.model.Item;
 import se.gritacademy.rentalapi.repository.ItemRepository;
+import se.gritacademy.rentalapi.repository.RentalRepository;
 
 import java.util.List;
 
@@ -12,9 +13,11 @@ import java.util.List;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final RentalRepository rentalRepository;
 
-    public ItemService(ItemRepository itemRepository) {
+    public ItemService(ItemRepository itemRepository, RentalRepository rentalRepository) {
         this.itemRepository = itemRepository;
+        this.rentalRepository = rentalRepository;
     }
 
     public List<Item> getAllItems() {

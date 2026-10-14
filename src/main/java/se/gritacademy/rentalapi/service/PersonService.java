@@ -1,9 +1,11 @@
 package se.gritacademy.rentalapi.service;
 
 import org.springframework.stereotype.Service;
+import se.gritacademy.rentalapi.exception.ConflictException;
 import se.gritacademy.rentalapi.exception.ResourceNotFoundException;
 import se.gritacademy.rentalapi.model.Person;
 import se.gritacademy.rentalapi.repository.PersonRepository;
+import se.gritacademy.rentalapi.repository.RentalRepository;
 
 import java.util.List;
 
@@ -11,9 +13,11 @@ import java.util.List;
 public class PersonService {
 
     private final PersonRepository personRepository;
+    private final RentalRepository rentalRepository;
 
-    public PersonService(PersonRepository personRepository) {
+    public PersonService(PersonRepository personRepository, RentalRepository rentalRepository) {
         this.personRepository = personRepository;
+        this.rentalRepository = rentalRepository;
     }
 
     public List<Person> getAllPersons() {
@@ -41,6 +45,10 @@ public class PersonService {
 
     public void deletePerson(Long id) {
         Person existingPerson = getPersonById(id);
+
+        if (rentalRepository.existsByPersonId(id)) {
+            throw new ConflictException("Person with id " + id + " has rental history and cannot be deleted");
+        }
         personRepository.delete(existingPerson);
     }
 }

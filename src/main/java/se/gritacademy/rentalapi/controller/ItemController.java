@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import se.gritacademy.rentalapi.model.Item;
+import se.gritacademy.rentalapi.repository.RentalRepository;
 import se.gritacademy.rentalapi.service.ItemService;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class ItemController {
 
     private final ItemService itemService;
+    private final RentalRepository rentalRepository;
 
     public ItemController(ItemService itemService) {
         this.itemService = itemService;
