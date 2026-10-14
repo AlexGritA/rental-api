@@ -15,7 +15,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    // Regler: vem får göra vad
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -33,13 +32,12 @@ public class SecurityConfig {
 
         return http.build();
     }
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    // Inloggningsanvändarna
+    
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         return new InMemoryUserDetailsManager(
